@@ -1,14 +1,19 @@
+import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'drink_model.g.dart';
 
 @JsonSerializable()
-class DrinksModel {
+@HiveType(typeId: 0)
+class DrinksModel extends HiveObject {
+  @HiveField(0)
   final String idDrink;
+  @HiveField(1)
   final String strDrink;
   final String strDrinkAlternate;
   final String strTags;
   final String strVideo;
+  @HiveField(2)
   final String strCategory;
   final String strIBA;
   final String strAlcoholic;
@@ -22,6 +27,7 @@ class DrinksModel {
   final String strInstructionsZHHANS;
   @JsonKey(name: "strInstructionsZH-HANT")
   final String strInstructionsZHHANT;
+  @HiveField(3)
   final String strDrinkThumb;
   final String strIngredient1;
   final String strIngredient2;
@@ -60,6 +66,14 @@ class DrinksModel {
       this.strInstructionsZHHANS = "",
       this.strInstructionsZHHANT = "",
       this.strMeasure1 = ""});
+
+  @override
+  String toString() {
+    return '''
+  id: $idDrink
+  drink: $strDrink
+  ''';
+  }
 
   /// Connect the generated [_$DrinksModelFromJson] function to the `fromJson`
   /// factory.

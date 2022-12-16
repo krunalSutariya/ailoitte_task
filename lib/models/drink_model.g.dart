@@ -3,6 +3,53 @@
 part of 'drink_model.dart';
 
 // **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
+class DrinksModelAdapter extends TypeAdapter<DrinksModel> {
+  @override
+  final int typeId = 0;
+
+  @override
+  DrinksModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return DrinksModel(
+      idDrink: fields[0] as String? ?? "",
+      strDrink: fields[1] as String? ?? "",
+      strCategory: fields[2] as String? ?? "",
+      strDrinkThumb: fields[3] as String? ?? "",
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, DrinksModel obj) {
+    writer
+      ..writeByte(4)
+      ..writeByte(0)
+      ..write(obj.idDrink)
+      ..writeByte(1)
+      ..write(obj.strDrink)
+      ..writeByte(2)
+      ..write(obj.strCategory)
+      ..writeByte(3)
+      ..write(obj.strDrinkThumb);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DrinksModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 

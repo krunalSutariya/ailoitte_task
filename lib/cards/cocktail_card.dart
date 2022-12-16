@@ -7,12 +7,13 @@ import '../widgets/custom_text.dart';
 
 class CocktailCard extends StatelessWidget {
   final DrinksModel drinksModel;
-  const CocktailCard({super.key, required this.drinksModel});
+  final void Function()? onTap;
+  const CocktailCard({super.key, required this.drinksModel, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () => cardOntapAction(context),
+      onTap: onTap,
       leading: CustImage(
         cornerRadius: 10,
         imgURL: drinksModel.strDrinkThumb,
@@ -37,13 +38,5 @@ class CocktailCard extends StatelessWidget {
         color: Colors.grey,
       ),
     );
-  }
-
-  //!----------------------------Button action------------------------//
-
-  //Card Ontap Action
-  void cardOntapAction(BuildContext context) {
-    Navigator.pushNamed(context, AppRouts.cocktailDetailScreen,
-        arguments: drinksModel.toJson());
   }
 }

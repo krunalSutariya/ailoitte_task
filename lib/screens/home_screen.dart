@@ -1,4 +1,5 @@
 import 'package:ailoitte_task/cards/cocktail_card.dart';
+import 'package:ailoitte_task/models/drink_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
@@ -46,7 +47,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
 
   // Appbar
   AppBar _buildAppbar() {
@@ -114,6 +114,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemBuilder: (context, index) {
                   return CocktailCard(
                     drinksModel: cocktailProvider.cocktailList[index],
+                    onTap: () =>
+                        cardOntapAction(cocktailProvider.cocktailList[index]),
                   );
                 },
               ),
@@ -129,6 +131,12 @@ class _HomeScreenState extends State<HomeScreen> {
     if (!currentFocus.hasPrimaryFocus) {
       currentFocus.unfocus();
     }
+  }
+
+  // Card Ontap Action
+  void cardOntapAction(DrinksModel drinksModel) {
+    Navigator.pushNamed(context, AppRouts.cocktailDetailScreen,
+        arguments: {"drink": drinksModel.toJson(), "isFavroite": false});
   }
 
   //! ---------------------------------Helper function----------------------------//
